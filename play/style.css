@@ -26,7 +26,7 @@ table {
 
 td {
     height: 7vh;
-    width: 40vw;
+    width: 10vw;
     padding: 5px;
     background-color: grey;
 }
@@ -36,9 +36,10 @@ tr.current {
 }
 
 .stack {
-    background-color: white;
+    background-color: black;
     width: 100vw;
     height: 30vh;
+    margin: 0;
     padding: 10px;
     gap: 10px;
     display: grid;

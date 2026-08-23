@@ -1,6 +1,6 @@
 // Données
 const trys = 8;
-const colorList = ['red', 'pink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
+const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
 // Références DOM
 const table = document.querySelector('table');
@@ -32,16 +32,18 @@ function showCurrentRow() {
     rows[turn - 1]?.classList.remove('current');
 }
 
+// Fonction utilitaire
 function isCurrentCell(cell) {
     return cell.parentElement === rows[turn];
 }
 
+// Autoriser le drag n drop
 colors.forEach((color) => {
     color.addEventListener('dragstart', (event) => {
         event.dataTransfer.setData('text/plain', color.style.backgroundColor);
     });
 });
-
+// Autoriser le drag n drop
 cells.forEach((cell) => {
     cell.addEventListener('dragover', (event) => {
         if (isCurrentCell(cell)) {
@@ -61,11 +63,24 @@ cells.forEach((cell) => {
 
 // eventListener pour lasser au tour suivant
 submitBtn.addEventListener('click', () => {
+    // Résoudre le jeu si tous les essais sont utilisés
     if (turn + 1 >= trys) {
         resolve();
         return;
     }
 
+    // Verifier que toutes les cases sont complètes
+    cells.forEach(cell => {
+        if (!isCurrentCell(cell)) {
+            return;
+        }
+        if (cell.children == []) {
+            alert('Remplissez toutes les cases de la ligne avant de valider.');
+            return;
+        }
+    })
+
+    // Passer au tour suivant
     turn++;
     showCurrentRow();
 });

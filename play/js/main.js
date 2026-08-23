@@ -6,6 +6,7 @@ const colorList = ['red', 'pink', 'green', 'blue', 'orange', 'grey', 'white', 'y
 const table = document.querySelector('table');
 const rows = [...document.querySelectorAll('tr')];
 const colors = [...document.querySelectorAll('.color')];
+const cells = [...document.querySelectorAll('td')];
 const submitBtn = document.querySelector('#submit');
 let turn = 0;
 
@@ -31,9 +32,36 @@ function showCurrentRow() {
     rows[turn - 1]?.classList.remove('current');
 }
 
+function isCurrentCell(cell) {
+    return cell.parentElement === rows[turn];
+}
+
+colors.forEach((color) => {
+    color.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData('text/plain', color.style.backgroundColor);
+    });
+});
+
+cells.forEach((cell) => {
+    cell.addEventListener('dragover', (event) => {
+        if (isCurrentCell(cell)) {
+            event.preventDefault();
+        }
+    });
+
+    cell.addEventListener('drop', (event) => {
+        if (!isCurrentCell(cell)) {
+            return;
+        }
+
+        event.preventDefault();
+        cell.style.backgroundColor = event.dataTransfer.getData('text/plain');
+    });
+});
+
 // eventListener pour lasser au tour suivant
 submitBtn.addEventListener('click', () => {
-    if (turn >= trys) {
+    if (turn + 1 >= trys) {
         resolve();
         return;
     }

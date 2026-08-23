@@ -7,13 +7,14 @@ const table = document.querySelector('table');
 const rows = [...document.querySelectorAll('tr')];
 const colors = [...document.querySelectorAll('.color')];
 const submitBtn = document.querySelector('#submit');
+let turn = 0;
 
 // Fonction à appeler pour lancer le jeu
 function init() {
     for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
-    let turn = 0;
+    turn = 0;
     showCurrentRow();
 }
 

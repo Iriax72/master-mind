@@ -19,7 +19,7 @@ function init() {
 
 // Fonction à appeler une fois le jeu terminé
 function resolve() {
-
+    alert('Le jeu est terminé !')
 }
 
 // Fonction qui indique visuellement le tour actuel

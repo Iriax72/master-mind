@@ -69,16 +69,14 @@ submitBtn.addEventListener('click', () => {
         return;
     }
 
-    // Verifier que toutes les cases sont complètes
-    cells.forEach(cell => {
-        if (!isCurrentCell(cell)) {
-            return;
-        }
-        if (cell.children == []) {
-            alert('Remplissez toutes les cases de la ligne avant de valider.');
-            return;
-        }
-    })
+    // Vérifier que toutes les cases sont complètes
+    const currentCells = [...rows[turn].cells];
+    const isRowComplete = currentCells.every(cell => cell.style.backgroundColor);
+
+    if (!isRowComplete) {
+        alert('Remplissez toutes les cases de la ligne avant de valider.');
+        return;
+    }
 
     // Passer au tour suivant
     turn++;

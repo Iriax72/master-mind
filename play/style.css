@@ -1,0 +1,51 @@
+body {
+    padding: 0;
+    background-color: violet;
+}
+
+#submit {
+    margin: 2vh;
+    height: 6vh;
+    width: 50vw;
+    background-color: orange;
+    color: black;
+}
+
+.game {
+    background-color: blue;
+    width: 100vw;
+    height: 60vh;
+    padding: 20px 70px;
+}
+
+table {
+    background-color: black;
+}
+
+td {
+    padding: 5px;
+}
+
+tr.current {
+    outline: 3px solid yellow;
+}
+
+.stack {
+    background-color: white;
+    width: 100vw;
+    height: 30vh;
+    padding: 10px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 4fr;
+    grid-template-rows: 2fr;
+}
+
+.color {
+    padding: 5px;
+}
+
+.image {
+    width: 5vw;
+    height: 5vh;
+}

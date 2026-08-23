@@ -1,6 +1,7 @@
 body {
     padding: 0;
     background-color: violet;
+    align-items: center;
 }
 
 #submit {
@@ -16,6 +17,7 @@ body {
     width: 100vw;
     height: 60vh;
     padding: 20px 70px;
+    align-items: center;
 }
 
 table {
@@ -23,7 +25,10 @@ table {
 }
 
 td {
+    height: 7vh;
+    width: 40vw;
     padding: 5px;
+    background-color: grey;
 }
 
 tr.current {
@@ -37,8 +42,8 @@ tr.current {
     padding: 10px;
     gap: 10px;
     display: grid;
-    grid-template-columns: 4fr;
-    grid-template-rows: 2fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .color {

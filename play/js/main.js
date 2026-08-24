@@ -39,6 +39,7 @@ function resolve(result) {
     } else {
         alert('La partie à pris fin');
     }
+    throw 'Le jeu est terminé !';
 }
 
 // Fonction qui indique visuellement le tour actuel
@@ -140,6 +141,7 @@ submitBtn.addEventListener('click', () => {
 
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {
+        turn++;
         resolve('WIN');
         return;
     }

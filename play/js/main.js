@@ -139,6 +139,7 @@ submitBtn.addEventListener('click', () => {
     alert('essai: ' + essai);
 
     // Anoncer le résultat de l'essai
+    alert(`game: ${game}, combi: ${game.combinaison}, Logic.evaluate: ${Logic.evaluate}.`)
     const result = Logic.evaluate(game.combinaison, essai);
     alert('result: ' + result);
     const resultCases = [...game.rows[game.turn].querySelectorAll('.result')];

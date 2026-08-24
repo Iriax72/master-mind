@@ -136,9 +136,11 @@ submitBtn.addEventListener('click', () => {
     }
 
     const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
+    alert('essai: ' + essai);
 
     // Anoncer le résultat de l'essai
     const result = Logic.evaluate(game.combinaison, essai);
+    alert('result: ' + result);
     const resultCases = [...game.rows[game.turn].querySelectorAll('.result')];
     resultCases[0].innerText = result[0];
     resultCases[1].innerText = result[1];

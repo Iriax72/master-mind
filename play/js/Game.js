@@ -3,7 +3,7 @@ export default class Game {
         this.combinaison = combi;
         this.table = table;
         this.rows = [...this.table.querySelectorAll('tr')];
-        this.cases = [...this.table.querySelectorAll('.case')];
+        // this.cases = [...this.table.querySelectorAll('.case')];
         this.trys = trys;
         this.turn = 0;
 

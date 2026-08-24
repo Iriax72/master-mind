@@ -24,10 +24,10 @@ const submitBtn = document.querySelector('#submit');
 
 // Fonction à appeler pour lancer le jeu
 function init() {
-    game = new Game(Logic.rdmCombi, table);
     for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
+    game = new Game(Logic.rdmCombi, table);
     // game.showCurrentRow();
 }
 
@@ -106,7 +106,7 @@ colors.forEach((color) => {
     });
 });
 // Autoriser le drag n drop
-game.cases.forEach((cell) => {
+[...document.querySelectorAll('.case')].forEach((cell) => {
     cell.addEventListener('dragover', (event) => {
         if (isCurrentCell(cell)) {
             event.preventDefault();

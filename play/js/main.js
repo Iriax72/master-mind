@@ -26,7 +26,7 @@ function init() {
         colors[i].style.backgroundColor = colorList[i];
     }
     combinaison = rdmCombinaison();
-    alert('Test, Combinaison: ', combinaison);
+    alert(`Test, Combinaison : ${combinaison}`);
     turn = 0;
     showCurrentRow();
 }
@@ -117,7 +117,7 @@ cells.forEach((cell) => {
 submitBtn.addEventListener('click', () => {
 
     // Vérifier que toutes les cases sont complètes
-    const currentCells = [...rows[turn].cells];
+    const currentCells = [...rows[turn].querySelectorAll('.case')];
     const isRowComplete = currentCells.every(cell => cell.style.backgroundColor);
 
     if (!isRowComplete) {
@@ -129,7 +129,7 @@ submitBtn.addEventListener('click', () => {
 
     // Anoncer le résultat de l'essai
     const result = evaluate(combinaison, essai);
-    alert('Test, resultat: ', result);
+    alert(`Test, résultat : ${result}`);
 
     // Résoudre le jeu si tous les essais sont épuisés
     if (turn + 1 >= trys) {

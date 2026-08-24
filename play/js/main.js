@@ -26,14 +26,19 @@ function init() {
         colors[i].style.backgroundColor = colorList[i];
     }
     combinaison = rdmCombinaison();
-    alert(`Test, Combinaison : ${combinaison}`);
     turn = 0;
     showCurrentRow();
 }
 
 // Fonction à appeler une fois le jeu terminé
-function resolve() {
-    alert('Le jeu est terminé !')
+function resolve(result) {
+    if (result === 'WIN') {
+        alert(`Bravo !\nVous avez gagné en ${turn} coups`);
+    } else if (result === 'LOSE') {
+        alert(`Vous avez perdu :(\nLa combinaison était ${combinaison}`);
+    } else {
+        alert('La partie à pris fin');
+    }
 }
 
 // Fonction qui indique visuellement le tour actuel
@@ -129,11 +134,18 @@ submitBtn.addEventListener('click', () => {
 
     // Anoncer le résultat de l'essai
     const result = evaluate(combinaison, essai);
-    alert(`Test, résultat : ${result}`);
+    const resultCases = [...rows[turn].querySelectorAll('.result')];
+    resultCases[0].innerText, resultCases[1].innerText = result[0], result[1];
+
+    // Résoudre le jeu si l'utilisateur à trouvé
+    if (result[0] === 4) {
+        resolve('WIN');
+        return;
+    }
 
     // Résoudre le jeu si tous les essais sont épuisés
     if (turn + 1 >= trys) {
-        resolve();
+        resolve('LOSE');
         return;
     }
 
@@ -142,5 +154,5 @@ submitBtn.addEventListener('click', () => {
     showCurrentRow();
 });
 
-// Initialisation
+// Initialiser
 init();

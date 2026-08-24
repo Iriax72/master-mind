@@ -22,7 +22,7 @@ let combinaison = [];
 
 // Fonction à appeler pour lancer le jeu
 function init() {
-    for (let i = 0; i = colors.length; i++) {
+    for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
     combinaison = rdmCombinaison();
@@ -57,7 +57,7 @@ function rdmCombinaison() {
     const numbers = [...Array(8).keys()];
     let combi = [];
     for (let i = 0; i < 4; i++) {
-        const rdm = Math.floor(Math.random * numbers.length);
+        const rdm = Math.floor(Math.random() * numbers.length);
         combi.push(numbers[rdm])
         numbers.splice(rdm, 1);
     }
@@ -74,7 +74,7 @@ function evaluate(solution, combi) {
     let wellPositioned = 0;
     let wrongPosition = 0;
     combi.forEach(color => {
-        if (!solution.include(color))
+        if (!solution.includes(color))
             { return; }
 
         const index = combi.indexOf(color);

@@ -1,20 +1,32 @@
 // Données
 const trys = 8;
-const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
+const colorList = [
+    'red',
+    'deeppink',
+    'green',
+    'blue',
+    'orange',
+    'grey',
+    'white',
+    'yellow'
+];
 
 // Références DOM
 const table = document.querySelector('table');
 const rows = [...document.querySelectorAll('tr')];
 const colors = [...document.querySelectorAll('.color')];
-const cells = [...document.querySelectorAll('td')];
+const cells = [...document.querySelectorAll('.case')];
 const submitBtn = document.querySelector('#submit');
 let turn = 0;
+let combinaison = [];
 
 // Fonction à appeler pour lancer le jeu
 function init() {
-    for (let i = 0; i < colors.length; i++) {
+    for (let i = 0; i = colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
+    combinaison = rdmCombinaison();
+    alert('Test, Combinaison: ', combinaison);
     turn = 0;
     showCurrentRow();
 }
@@ -35,6 +47,46 @@ function showCurrentRow() {
 // Fonction utilitaire
 function isCurrentCell(cell) {
     return cell.parentElement === rows[turn];
+}
+
+/**
+ * @description génère une liste de 4 nombres différents entre 0 et 7 (compris)
+ * @returns {Array(4)[int]} Une liste d'ints de longueur 4
+ */
+function rdmCombinaison() {
+    const numbers = [...Array(8).keys()];
+    let combi = [];
+    for (let i = 0; i < 4; i++) {
+        const rdm = Math.floor(Math.random * numbers.length);
+        combi.push(numbers[rdm])
+        numbers.splice(rdm, 1);
+    }
+    return combi;
+}
+
+/**
+ * @description Évalue à quel point une combinaison est proche d'une combinaison solution
+ * @param {Array(4)[int]} solution 
+ * @param {Array(4)[int]} combi 
+ * @returns {Array(2)[int]} La premère valeur est le nombre de couleurs bien positionées, la deuxieme est le nombre de couleur mal positionées
+ */
+function evaluate(solution, combi) {
+    let wellPositioned = 0;
+    let wrongPosition = 0;
+    combi.forEach(color => {
+        if (!solution.include(color))
+            { return; }
+
+        const index = combi.indexOf(color);
+        if (solution[index] === color)
+        {
+            wellPositioned++; 
+            return;
+        }
+
+        wrongPosition++;
+    });
+    return [wellPositioned, wrongPosition];
 }
 
 // Autoriser le drag n drop
@@ -63,11 +115,6 @@ cells.forEach((cell) => {
 
 // eventListener pour lasser au tour suivant
 submitBtn.addEventListener('click', () => {
-    // Résoudre le jeu si tous les essais sont utilisés
-    if (turn + 1 >= trys) {
-        resolve();
-        return;
-    }
 
     // Vérifier que toutes les cases sont complètes
     const currentCells = [...rows[turn].cells];
@@ -75,6 +122,18 @@ submitBtn.addEventListener('click', () => {
 
     if (!isRowComplete) {
         alert('Remplissez toutes les cases de la ligne avant de valider.');
+        return;
+    }
+
+    const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
+
+    // Anoncer le résultat de l'essai
+    const result = evaluate(combinaison, essai);
+    alert('Test, resultat: ', result);
+
+    // Résoudre le jeu si tous les essais sont épuisés
+    if (turn + 1 >= trys) {
+        resolve();
         return;
     }
 

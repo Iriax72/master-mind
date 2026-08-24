@@ -41,10 +41,26 @@ table {
     table-layout: fixed;
 }
 
-td {
+td.case {
     height: 7vh;
     padding: 5px;
     background-color: pink;
+}
+
+tr > td.result:first-child {
+    height: 7vh;
+    padding: 2px;
+    background-color: red;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+tr > td.result:last-child {
+    height: 7vh;
+    padding: 2px;
+    background-color: white;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 tr.current {

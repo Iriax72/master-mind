@@ -22,7 +22,7 @@ body {
     margin: 2vh;
     height: 6vh;
     width: 50vw;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     background-color: #f66600;
     color: #400050;
 }
@@ -52,7 +52,7 @@ td.case {
 }
 
 tr > td.result:first-child {
-    height: 4vh;
+    height: 6vh;
     padding: 2px;
     background-color: red;
     border-top-left-radius: 8px;
@@ -60,7 +60,7 @@ tr > td.result:first-child {
 }
 
 tr > td.result:last-child {
-    height: 4vh;
+    height: 6vh;
     padding: 2px;
     background-color: white;
     border-top-right-radius: 8px;

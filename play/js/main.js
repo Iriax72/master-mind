@@ -13,6 +13,7 @@ const colorList = [
     'white',
     'yellow'
 ];
+let game;
 
 // Références DOM
 const table = document.querySelector('table');
@@ -23,7 +24,7 @@ const submitBtn = document.querySelector('#submit');
 
 // Fonction à appeler pour lancer le jeu
 function init() {
-    const game = new Game(Logic.rdmCombi, table);
+    game = new Game(Logic.rdmCombi, table);
     for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }

@@ -136,7 +136,7 @@ submitBtn.addEventListener('click', () => {
     const result = evaluate(combinaison, essai);
     const resultCases = [...rows[turn].querySelectorAll('.result')];
     resultCases[0].innerText = result[0];
-    resultCases[1].inmerText = result[1];
+    resultCases[1].innerText = result[1];
 
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {

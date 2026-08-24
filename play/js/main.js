@@ -1,5 +1,8 @@
+// Imports
+import Logic from '../../logic.js';
+import Game from './Game.js';
+
 // Données
-const trys = 8;
 const colorList = [
     'red',
     'deeppink',
@@ -13,29 +16,26 @@ const colorList = [
 
 // Références DOM
 const table = document.querySelector('table');
-const rows = [...document.querySelectorAll('tr')];
+// const rows = [...table.querySelectorAll('tr')];
 const colors = [...document.querySelectorAll('.color')];
-const cells = [...document.querySelectorAll('.case')];
+// const cells = [...table.querySelectorAll('.case')];
 const submitBtn = document.querySelector('#submit');
-let turn = 0;
-let combinaison = [];
 
 // Fonction à appeler pour lancer le jeu
 function init() {
+    const game = new Game(Logic.rdmCombi, table);
     for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
-    combinaison = rdmCombinaison();
-    turn = 0;
-    showCurrentRow();
+    // game.showCurrentRow();
 }
 
 // Fonction à appeler une fois le jeu terminé
 function resolve(result) {
     if (result === 'WIN') {
-        alert(`Bravo !\nVous avez gagné en ${turn} coups`);
+        alert(`Bravo !\nVous avez gagné en ${game.turn} coups`);
     } else if (result === 'LOSE') {
-        alert(`Vous avez perdu :(\nLa combinaison était ${combinaison}`);
+        alert(`Vous avez perdu :(\nLa combinaison était ${game.combinaison}`);
     } else {
         alert('La partie à pris fin');
     }
@@ -43,22 +43,24 @@ function resolve(result) {
 }
 
 // Fonction qui indique visuellement le tour actuel
+/*
 function showCurrentRow() {
-    const row = rows[turn];
+    const row = game.rows[game.turn];
 
     row.classList.add('current');
-    rows[turn - 1]?.classList.remove('current');
+    game.rows[game.turn - 1]?.classList.remove('current');
 }
-
+*/
 // Fonction utilitaire
 function isCurrentCell(cell) {
-    return cell.parentElement === rows[turn];
+    return cell.parentElement === game.rows[game.turn];
 }
 
+/*
 /**
  * @description génère une liste de 4 nombres différents entre 0 et 7 (compris)
  * @returns {Array(4)[int]} Une liste d'ints de longueur 4
- */
+ 
 function rdmCombinaison() {
     const numbers = [...Array(8).keys()];
     let combi = [];
@@ -75,9 +77,9 @@ function rdmCombinaison() {
  * @param {Array(4)[int]} solution 
  * @param {Array(4)[int]} combi 
  * @returns {Array(2)[int]} La premère valeur est le nombre de couleurs bien positionées, la deuxieme est le nombre de couleur mal positionées
- */
+ 
 function evaluate(solution, combi) {
-    let wellPositioned = 0;
+    let goodPosition = 0;
     let wrongPosition = 0;
     combi.forEach(color => {
         if (!solution.includes(color))
@@ -86,14 +88,15 @@ function evaluate(solution, combi) {
         const index = combi.indexOf(color);
         if (solution[index] === color)
         {
-            wellPositioned++; 
+            goodPosition++; 
             return;
         }
 
         wrongPosition++;
     });
-    return [wellPositioned, wrongPosition];
+    return [goodPosition, wrongPosition];
 }
+*/
 
 // Autoriser le drag n drop
 colors.forEach((color) => {
@@ -102,7 +105,7 @@ colors.forEach((color) => {
     });
 });
 // Autoriser le drag n drop
-cells.forEach((cell) => {
+game.cases.forEach((cell) => {
     cell.addEventListener('dragover', (event) => {
         if (isCurrentCell(cell)) {
             event.preventDefault();
@@ -123,7 +126,7 @@ cells.forEach((cell) => {
 submitBtn.addEventListener('click', () => {
 
     // Vérifier que toutes les cases sont complètes
-    const currentCells = [...rows[turn].querySelectorAll('.case')];
+    const currentCells = [...game.rows[game.turn].querySelectorAll('.case')];
     const isRowComplete = currentCells.every(cell => cell.style.backgroundColor);
 
     if (!isRowComplete) {
@@ -134,27 +137,27 @@ submitBtn.addEventListener('click', () => {
     const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
 
     // Anoncer le résultat de l'essai
-    const result = evaluate(combinaison, essai);
-    const resultCases = [...rows[turn].querySelectorAll('.result')];
+    const result = Logic.evaluate(game.combinaison, essai);
+    const resultCases = [...game.rows[game.turn].querySelectorAll('.result')];
     resultCases[0].innerText = result[0];
     resultCases[1].innerText = result[1];
 
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {
-        turn++;
+        game.turn++;
         resolve('WIN');
         return;
     }
 
     // Résoudre le jeu si tous les essais sont épuisés
-    if (turn + 1 >= trys) {
+    if (game.turn + 1 >= game.trys) {
         resolve('LOSE');
         return;
     }
 
     // Passer au tour suivant
-    turn++;
-    showCurrentRow();
+    game.turn++;
+    game.showCurrentRow();
 });
 
 // Initialiser

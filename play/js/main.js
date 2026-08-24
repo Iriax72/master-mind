@@ -27,7 +27,7 @@ function init() {
     for (let i = 0; i < colors.length; i++) {
         colors[i].style.backgroundColor = colorList[i];
     }
-    game = new Game(Logic.rdmCombi, table);
+    game = new Game(Logic.rdmCombi(), table);
     // game.showCurrentRow();
 }
 

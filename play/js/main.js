@@ -3,35 +3,21 @@ import Logic from '../../Logic.js';
 import Game from './Game.js';
 
 // Données
-const colorList = [
-    'red',
-    'deeppink',
-    'green',
-    'blue',
-    'orange',
-    'grey',
-    'white',
-    'yellow'
-];
+const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 let game;
 
 // Références DOM
 const table = document.querySelector('table');
-// const rows = [...table.querySelectorAll('tr')];
 const colors = [...document.querySelectorAll('.color')];
-// const cells = [...table.querySelectorAll('.case')];
 const submitBtn = document.querySelector('#submit');
 
-// Fonction à appeler pour lancer le jeu
-function init() {
-    for (let i = 0; i < colors.length; i++) {
-        colors[i].style.backgroundColor = colorList[i];
-    }
-    game = new Game(Logic.rdmCombi(), table);
-    // game.showCurrentRow();
+// Donner une couleur aux td.color
+for (let i = 0; i < colors.length; i++) {
+    colors[i].style.backgroundColor = colorList[i];
 }
 
-// Fonction à appeler une fois le jeu terminé
+// Fonction à  une fois le jeu terminé
+/*
 function resolve(result) {
     if (result === 'WIN') {
         alert(`Bravo !\nVous avez gagné en ${game.turn} coups`);
@@ -41,87 +27,45 @@ function resolve(result) {
         alert('La partie à pris fin');
     }
     throw 'Le jeu est terminé !';
-}
+}*/
 
-// Fonction qui indique visuellement le tour actuel
-/*
-function showCurrentRow() {
-    const row = game.rows[game.turn];
-
-    row.classList.add('current');
-    game.rows[game.turn - 1]?.classList.remove('current');
-}
-*/
 // Fonction utilitaire
+/*
 function isCurrentCell(cell) {
     return cell.parentElement === game.rows[game.turn];
-}
+}*/
 
-/*
-/**
- * @description génère une liste de 4 nombres différents entre 0 et 7 (compris)
- * @returns {Array(4)[int]} Une liste d'ints de longueur 4
- 
-function rdmCombinaison() {
-    const numbers = [...Array(8).keys()];
-    let combi = [];
-    for (let i = 0; i < 4; i++) {
-        const rdm = Math.floor(Math.random() * numbers.length);
-        combi.push(numbers[rdm])
-        numbers.splice(rdm, 1);
-    }
-    return combi;
-}
-
-/**
- * @description Évalue à quel point une combinaison est proche d'une combinaison solution
- * @param {Array(4)[int]} solution 
- * @param {Array(4)[int]} combi 
- * @returns {Array(2)[int]} La premère valeur est le nombre de couleurs bien positionées, la deuxieme est le nombre de couleur mal positionées
- 
-function evaluate(solution, combi) {
-    let goodPosition = 0;
-    let wrongPosition = 0;
-    combi.forEach(color => {
-        if (!solution.includes(color))
-            { return; }
-
-        const index = combi.indexOf(color);
-        if (solution[index] === color)
-        {
-            goodPosition++; 
-            return;
-        }
-
-        wrongPosition++;
+// Fonction pour autoriser le drag n drop
+function allowDragNDrop(draggables) {
+    draggables.forEach((draggable) => {
+        draggable.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', color.style.backgroundColor);
+        });
     });
-    return [goodPosition, wrongPosition];
-}
-*/
 
-// Autoriser le drag n drop
-colors.forEach((color) => {
-    color.addEventListener('dragstart', (event) => {
-        event.dataTransfer.setData('text/plain', color.style.backgroundColor);
-    });
-});
-// Autoriser le drag n drop
-[...document.querySelectorAll('.case')].forEach((cell) => {
-    cell.addEventListener('dragover', (event) => {
-        if (isCurrentCell(cell)) {
+    [...document.querySelectorAll('.case')].forEach((goal) => {
+        goal.addEventListener('dragover', (event) => {
+            if (game.isCurrentCell(goal)) {
+                event.preventDefault();
+            }
+        });
+
+        goal.addEventListener('drop', (event) => {
+            if (!game.isCurrentCell(goal)) {
+                return;
+            }
+
             event.preventDefault();
-        }
+            goal.style.backgroundColor = event.dataTransfer.getData('text/plain');
+        });
     });
+}
 
-    cell.addEventListener('drop', (event) => {
-        if (!isCurrentCell(cell)) {
-            return;
-        }
+// Créer la partie
+const game = new Game(Logic.rdmCombi, table);
 
-        event.preventDefault();
-        cell.style.backgroundColor = event.dataTransfer.getData('text/plain');
-    });
-});
+// Autoriser le drag n drop des couleurs
+allowDragNDrop(colors);
 
 // eventListener pour lasser au tour suivant
 submitBtn.addEventListener('click', () => {
@@ -136,12 +80,9 @@ submitBtn.addEventListener('click', () => {
     }
 
     const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
-    alert('essai: ' + essai);
 
     // Anoncer le résultat de l'essai
-    alert(`game: ${game}, combi: ${game.combinaison}, Logic.evaluate: ${Logic.evaluate}.`)
     const result = Logic.evaluate(game.combinaison, essai);
-    alert('result: ' + result);
     const resultCases = [...game.rows[game.turn].querySelectorAll('.result')];
     resultCases[0].innerText = result[0];
     resultCases[1].innerText = result[1];
@@ -149,13 +90,13 @@ submitBtn.addEventListener('click', () => {
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {
         game.turn++;
-        resolve('WIN');
+        game.resolve('WIN');
         return;
     }
 
     // Résoudre le jeu si tous les essais sont épuisés
     if (game.turn + 1 >= game.trys) {
-        resolve('LOSE');
+        game.resolve('LOSE');
         return;
     }
 
@@ -163,6 +104,3 @@ submitBtn.addEventListener('click', () => {
     game.turn++;
     game.showCurrentRow();
 });
-
-// Initialiser
-init();

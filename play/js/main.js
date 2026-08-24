@@ -1,5 +1,5 @@
 // Imports
-import Logic from '../../logic.js';
+import Logic from '../../Logic.js';
 import Game from './Game.js';
 
 // Données

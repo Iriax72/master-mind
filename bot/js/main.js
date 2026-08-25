@@ -15,6 +15,7 @@ initGame(() => {
         colorList.forEach(color => {
             const option = document.createElement('option');
             option.value = color;
+            option.textContent = color;
             option.style.backgroundColor = color;
             select.append(option);
         })

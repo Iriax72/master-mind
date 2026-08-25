@@ -29,4 +29,6 @@ initGame(() => {
         })
         submitBtn.disabled = true;
     });
+
+    Logic.possibleCombis();
 });

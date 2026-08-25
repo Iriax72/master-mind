@@ -40,4 +40,34 @@ export default class Logic {
 
         return [goodPosition, wrongPosition];
     }
+
+    /**
+     * @description Génère une combinaison possible
+     * @param {Object[Array[int](4), Array[int](2)](8)} state - les coups déjà joués sous forme {[3, 1, 0, 4]: [2, 1]}
+     * @returns {Array[int](4)} - le guess
+     */
+    static possibleCombis (state) {
+        const allCombis = [];
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (i === j) 
+                    { continue; }
+                for (let k = 0; k < 8; k++) {
+                    if (k === i || k === j)
+                        { continue; }
+                    for (let l = 0; l < 8; l++) {
+                        if (l === i || l === j || l === k)
+                            { continue; }
+                        allCombis.push([i, j, k, l]);
+                    }
+                }
+            }
+        }
+        alert(allCombis);
+        return [
+            [1, 2, 3, 4],
+            [0, 1, 2, 3],
+            [5, 4, 2, 6]
+        ];
+    }
 }

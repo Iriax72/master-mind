@@ -62,7 +62,8 @@ submitBtn.addEventListener('click', () => {
     const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
 
     // Anoncer le résultat de l'essai
-    game.printResult(Logic.evaluate(game.combinaison, essai));
+    const result = Logic.evaluate(game.combinaison, essai);
+    game.printResult(result);
 
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {

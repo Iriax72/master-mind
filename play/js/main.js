@@ -16,6 +16,7 @@ initGame(() => {
     */
 
     // Références DOM
+    const gameContainer = document.querySelector('#game-container');
     const table = gameContainer.querySelector('table');
     const colors = [...document.querySelectorAll('.color')];
     const submitBtn = document.querySelector('#submit');

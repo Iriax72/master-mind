@@ -14,24 +14,6 @@ const submitBtn = document.querySelector('#submit');
 for (let i = 0; i < colors.length; i++) {
     colors[i].style.backgroundColor = colorList[i];
 }
-// Fonction à  une fois le jeu terminé
-/*
-function resolve(result) {
-    if (result === 'WIN') {
-        alert(`Bravo !\nVous avez gagné en ${game.turn} coups`);
-    } else if (result === 'LOSE') {
-        alert(`Vous avez perdu :(\nLa combinaison était ${game.combinaison}`);
-    } else {
-        alert('La partie à pris fin');
-    }
-    throw 'Le jeu est terminé !';
-}*/
-
-// Fonction utilitaire
-/*
-function isCurrentCell(cell) {
-    return cell.parentElement === game.rows[game.turn];
-}*/
 
 // Fonction pour autoriser le drag n drop
 function allowDragNDrop(draggables) {
@@ -80,10 +62,7 @@ submitBtn.addEventListener('click', () => {
     const essai = currentCells.map(cell => colorList.indexOf(cell.style.backgroundColor));
 
     // Anoncer le résultat de l'essai
-    const result = Logic.evaluate(game.combinaison, essai);
-    const resultCases = [...game.rows[game.turn].querySelectorAll('.result')];
-    resultCases[0].innerText = result[0];
-    resultCases[1].innerText = result[1];
+    game.printResult(Logic.evaluate(game.combinaison, essai));
 
     // Résoudre le jeu si l'utilisateur à trouvé
     if (result[0] === 4) {
@@ -99,6 +78,5 @@ submitBtn.addEventListener('click', () => {
     }
 
     // Passer au tour suivant
-    game.turn++;
-    game.showCurrentRow();
+    game.nextTurn();
 });

@@ -20,6 +20,17 @@ export default class Game {
         this.rows[this.turn - 1]?.classList.remove('current');
     }
 
+    printResult(result) {
+        const resultCases = [...this.rows[this.turn].querySelectorAll('.result')];
+        resultCases[0].innerText = result[0];
+        resultCases[1].innerText = result[1];
+    }
+
+    nextTurn() {
+        this.turn++;
+        this.showCurrentRow();
+    }
+
     resolve(result) {
         if (result === 'WIN') {
             alert(`Bravo !\nVous avez gagné en ${this.turn} coups.`);

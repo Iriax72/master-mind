@@ -1,22 +1,20 @@
 // Imports
-import Logic from '../../Logic.js';
-import Game from './Game.js';
-alert('imports: ok');
+import '../../Logic.js';
+import './Game.js';
+
 // Données
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 let game;
-alert(`colorList: ${colorList}, game: ${game}`);
 
 // Références DOM
 const table = document.querySelector('table');
 const colors = [...document.querySelectorAll('.color')];
 const submitBtn = document.querySelector('#submit');
-alert('Références DOM: ok');
+
 // Donner une couleur aux td.color
 for (let i = 0; i < colors.length; i++) {
     colors[i].style.backgroundColor = colorList[i];
 }
-alert('Colors: ok');
 // Fonction à  une fois le jeu terminé
 /*
 function resolve(result) {

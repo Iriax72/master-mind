@@ -64,31 +64,31 @@ export default class Logic {
      * @param {Object<Array<int>(4), Array<int>(2)>} state - Les tentatives déjà notées sous forme {[combi, note], [combi, note], ...}
      * @returns {boolean}
      */
-    correspond (combi, state) {
-        function correspondToEval(combi, eval) {
+    static correspond (combi, state) {
+        function correspondToEval(combi, evaluation) {
             let goodPosition = 0;
             let wrongPosition = 0;
             combi.forEach(digit => {
-                if (eval[0].includes(digit)) {
-                    if (eval[0].indexOf(digit) === combi.indexOf(digit)) {
+                if (evaluation[0].includes(digit)) {
+                    if (evaluation[0].indexOf(digit) === combi.indexOf(digit)) {
                         goodPosition++;
                     } else {
                         wrongPosition++;
                     }
                 }
             });
-            if (goodPosition === eval[1][0] && wrongPosition === eval[1][1]) {
+            if (goodPosition === evaluation[1][0] && wrongPosition === evaluation[1][1]) {
                 return true;
             } else {
                 return false;
             }
         }
 
-        state.forEach(eval => {
-            if (!correspondToEval(combi, eval)) {
+        for (const evaluation of state) {
+            if (!correspondToEval(combi, evaluation)) {
                 return false;
             }
-        });
+        }
         return true;
     }
 
@@ -101,12 +101,6 @@ export default class Logic {
     }
 
     static possibleCombis(state) {
-        const possibleCombis = this.allCombis;
-        possibleCombis.forEach(combi => {
-            if (!this.correspond(combi, state)) {
-                possibleCombis.splice(indexOf(combi), 1);
-            }
-        });
-        return possibleCombis;
+        return this.allCombis.filter(combi => this.correspond(combi, state));
     }
 }

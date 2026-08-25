@@ -1,5 +1,5 @@
-import Logic from "../../Logic";
-import initGame from "../../game/gameTable";
+import Logic from "../../Logic.js";
+import initGame from "../../game/gameTable.js";
 
 // Données (TODO à factorisé car aussi présent dans /play/js/main.js)
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
@@ -15,9 +15,7 @@ initGame(() => {
         colorList.forEach(color => {
             const option = document.createElement('option');
             option.value = color;
-            const coloredDiv = document.createElement('div');
-            coloredDiv.style.backgroundColor = color;
-            option.innerHTML = coloredDiv;
+            option.style.backgroundColor = color;
             select.append(option);
         })
     })

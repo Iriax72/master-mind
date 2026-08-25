@@ -5,6 +5,8 @@ import initGame from "../../game/gameTable.js";
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
 initGame(() => {
+    const combi = [];
+    
     // Références DOM
     const submitBtn = document.querySelector('#submit');
     const combiSelector = document.querySelector('#combi-selector');
@@ -19,5 +21,12 @@ initGame(() => {
             option.style.backgroundColor = color;
             select.append(option);
         })
-    })
+    });
+
+    submitBtn.addEventListener('click', () => {
+        selects.forEach(select => {
+            combi.push(colorList.indexOf(select.value));
+        })
+        submitBtn.disabled = true;
+    });
 });

@@ -33,7 +33,7 @@ body {
     height: 60vh;
     padding: 20px 70px;
     display: flex;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
     overflow: hidden;
 }
@@ -57,6 +57,7 @@ tr > td.result:first-child {
     background-color: red;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    text-align: center;
 }
 
 tr > td.result:last-child {

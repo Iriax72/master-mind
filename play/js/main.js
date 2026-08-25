@@ -1,16 +1,19 @@
 // Imports
 import Logic from '../../Logic.js';
 import Game from './Game.js';
+import initGame from '../../game/gameTable.js';
 
 // Données
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
-async function initializeGame() {
+initGame(() => {
+    /*
     const response = await fetch('../game/gameTable.html');
     const gameDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
     const gameMarkup = gameDocument.querySelector('.game');
     const gameContainer = document.querySelector('#game-container');
     gameContainer.append(gameMarkup);
+    */
 
     // Références DOM
     const table = gameContainer.querySelector('table');
@@ -88,6 +91,4 @@ async function initializeGame() {
         // Passer au tour suivant
         game.nextTurn();
     });
-}
-
-initializeGame();
+});

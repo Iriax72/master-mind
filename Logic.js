@@ -103,7 +103,7 @@ export default class Logic {
     static possibleCombis(state) {
         const possibleCombis = this.allCombis;
         possibleCombis.forEach(combi => {
-            if (!correspond(combi, state)) {
+            if (!this.correspond(combi, state)) {
                 possibleCombis.splice(indexOf(combi), 1);
             }
         });

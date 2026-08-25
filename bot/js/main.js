@@ -1,7 +1,7 @@
 import Logic from "../../Logic.js";
 import initGame from "../../game/gameTable.js";
 
-// Données (TODO à factorisé car aussi présent dans /play/js/main.js)
+// Données (TODO à factoriser car aussi présent dans /play/js/main.js)
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
 initGame(() => {

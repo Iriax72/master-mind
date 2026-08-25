@@ -1,10 +1,9 @@
 // Imports
-import '../../Logic.js';
-import './Game.js';
+import Logic from '../../Logic.js';
+import Game from './Game.js';
 
 // Données
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
-let game;
 
 // Références DOM
 const table = document.querySelector('table');
@@ -38,7 +37,7 @@ function isCurrentCell(cell) {
 function allowDragNDrop(draggables) {
     draggables.forEach((draggable) => {
         draggable.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', color.style.backgroundColor);
+            event.dataTransfer.setData('text/plain', draggable.style.backgroundColor);
         });
     });
 
@@ -61,7 +60,7 @@ function allowDragNDrop(draggables) {
 }
 
 // Créer la partie
-const game = new Game(Logic.rdmCombi, table);
+const game = new Game(Logic.rdmCombi(), table);
 
 // Autoriser le drag n drop des couleurs
 allowDragNDrop(colors);

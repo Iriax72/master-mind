@@ -27,6 +27,7 @@ body {
     color: #400050;
 }
 
+/*
 .game {
     background-color: #400050;
     width: 100%;
@@ -71,7 +72,7 @@ tr > td.result:last-child {
 tr.current {
     outline: 3px solid yellow;
 }
-
+*/
 .stack {
     background-color: black;
     width: 100%;

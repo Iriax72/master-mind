@@ -27,52 +27,6 @@ body {
     color: #400050;
 }
 
-/*
-.game {
-    background-color: #400050;
-    width: 100%;
-    height: 60vh;
-    padding: 20px 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-table {
-    background-color: black;
-    width: 50%;
-    height: 100%;
-    table-layout: fixed;
-}
-
-td.case {
-    height: 6vh;
-    padding: 5px;
-    background-color: #393939;
-}
-
-tr > td.result:first-child {
-    height: 6vh;
-    padding: 2px;
-    background-color: red;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    text-align: center;
-}
-
-tr > td.result:last-child {
-    height: 6vh;
-    padding: 2px;
-    background-color: white;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-tr.current {
-    outline: 3px solid yellow;
-}
-*/
 .stack {
     background-color: black;
     width: 100%;

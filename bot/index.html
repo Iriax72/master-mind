@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bot mastermind</title>
     <link rel="stylesheet" href="style.css">
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="../game/gameTable.css">
+    <script type="module" src="js/main.js" defer></script>
 </head>
 <body>
-    Le fichier est vide pour l'instant !
+    <button type="button" id="submit">VALIDER</button>
+    <div id="game-container"></div>
+    <div id="combi-selector">
+        <form>
+            <select name="color1" id="colorSelect1"></select>
+            <select name="color2" id="colorSelect2"></select>
+            <select name="color3" id="colorSelect3"></select>
+            <select name="color4" id="colorSelect4"></select>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,0 +1,12 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+#submit {
+    margin: 2vh;
+    height: 6vh;
+    width: 50vw;
+    font-size: 2.2rem;
+    background-color: #f66600;
+    color: #400050;
+}

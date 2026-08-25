@@ -7,14 +7,6 @@ import initGame from '../../game/gameTable.js';
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
 initGame(() => {
-    /*
-    const response = await fetch('../game/gameTable.html');
-    const gameDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
-    const gameMarkup = gameDocument.querySelector('.game');
-    const gameContainer = document.querySelector('#game-container');
-    gameContainer.append(gameMarkup);
-    */
-
     // Références DOM
     const gameContainer = document.querySelector('#game-container');
     const table = gameContainer.querySelector('table');

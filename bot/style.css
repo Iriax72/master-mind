@@ -10,3 +10,8 @@
     background-color: #f66600;
     color: #400050;
 }
+
+#submit:disabled {
+    background-color: #bbbbbb;
+    color: #505050;
+}

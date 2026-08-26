@@ -1,7 +1,7 @@
 import Logic from "../../Logic.js";
 import Game from '../../Game.js';
 import initGame from "../../game/gameTable.js";
-
+alert('Imports effectués');
 // Données (TODO à factoriser car aussi présent dans /play/js/main.js)
 const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white', 'yellow'];
 
@@ -14,6 +14,7 @@ function play() {
 }
 
 initGame(() => {
+    alert('initGame appelé');
     const combi = [];
     
     // Références DOM

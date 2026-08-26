@@ -1,4 +1,3 @@
-alert('le script est execute')
 import Logic from "../../Logic.js";
 import Game from '../../Game.js';
 import initGame from "../../game/gameTable.js";

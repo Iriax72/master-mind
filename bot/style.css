@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-#submit {
+.btn {
     margin: 2vh;
     height: 6vh;
     width: 50vw;
@@ -11,7 +11,7 @@
     color: #400050;
 }
 
-#submit:disabled {
+.btn:disabled {
     background-color: #bbbbbb;
     color: #505050;
 }

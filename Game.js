@@ -7,6 +7,8 @@ export default class Game {
         this.trys = trys;
         this.turn = 0;
 
+        this.colorList = ['red', 'deeppink', 'green', 'orange', 'blue', 'grey', 'white', 'yellow'];
+
         this.showCurrentRow();
     }
 
@@ -14,10 +16,36 @@ export default class Game {
         return cell.parentElement === this.rows[this.turn];
     }
 
+    getState() {
+        const state = {};
+        for (let i = 0; i < this.turn; i++) {
+            const cases = [...this.rows[i].children];
+            const combi = [
+                this.colorList.indexOf(cases[1].style.backgroundColor),
+                this.colorList.indexOf(cases[2].style.backgroundColor),
+                this.colorList.indexOf(cases[3].style.backgroundColor),
+                this.colorList.indexOf(cases[4].style.backgroundColor)
+            ];
+            const evaluation = [
+                cases[0].innerText,
+                cases[5].innerText
+            ];
+            state[i] = [combi, evaluation];
+        }
+        return state;
+    }
+
     showCurrentRow() {
         const currentRow = this.rows[this.turn];
         currentRow.classList.add('current');
         this.rows[this.turn - 1]?.classList.remove('current');
+    }
+
+    play(combi) {
+        const currentRow = this.rows[this.turn];
+        for (let i = 0; i < 4; i++) {
+            currentRow[i].style.backgroundColor = this.colorList[combi[i]];
+        }
     }
 
     printResult(result) {
@@ -33,9 +61,9 @@ export default class Game {
 
     resolve(result) {
         if (result === 'WIN') {
-            alert(`Bravo !\nVous avez gagné en ${this.turn} coups.`);
+            alert(`Bravo !\nVictoire en ${this.turn} coups.`);
         } else if (result === 'LOSE') {
-            alert(`Vous avez perdu :(\nLa combinaison était ${this.combinaison}.`);
+            alert(`Défaite :(\nLa combinaison était ${this.combinaison}.`);
         } else {
             alert('La partie à pris fin.');
         }

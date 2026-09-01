@@ -9,9 +9,24 @@ const colorList = ['red', 'deeppink', 'green', 'blue', 'orange', 'grey', 'white'
 initGame(() => {
     // Références DOM
     const gameContainer = document.querySelector('#game-container');
+    if (!gameContainer) {
+        throw new Error('Le conteneur #game-container est introuvable.');
+    }
+
     const table = gameContainer.querySelector('table');
+    if (!table) {
+        throw new Error('La table du jeu est introuvable dans #game-container.');
+    }
+
     const colors = [...document.querySelectorAll('.color')];
+    if (!colors.length) {
+        throw new Error('Aucune couleur n’a été trouvée dans .color.');
+    }
+
     const submitBtn = document.querySelector('#submit');
+    if (!submitBtn) {
+        throw new Error('Le bouton #submit est introuvable.');
+    }
 
     // Donner une couleur aux td.color
     for (let i = 0; i < colors.length; i++) {
@@ -26,7 +41,12 @@ initGame(() => {
             });
         });
 
-        [...document.querySelectorAll('.case')].forEach((goal) => {
+        const allCases = [...document.querySelectorAll('.case')];
+        if (!allCases.length) {
+            throw new Error('Aucune case .case n’a été trouvée dans la grille.');
+        }
+
+        allCases.forEach((goal) => {
             goal.addEventListener('dragover', (event) => {
                 if (game.isCurrentCell(goal)) {
                     event.preventDefault();

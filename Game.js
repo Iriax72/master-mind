@@ -1,9 +1,16 @@
 export default class Game {
     constructor(combi, table, trys = 8) {
+        if (!table) {
+            throw new Error('La table du jeu est introuvable.');
+        }
+
         this.combinaison = combi;
         this.table = table;
         this.rows = [...this.table.querySelectorAll('tr')];
-        // this.cases = [...this.table.querySelectorAll('.case')];
+        if (!this.rows.length) {
+            throw new Error('La table du jeu ne contient aucune ligne (tr).');
+        }
+
         this.trys = trys;
         this.turn = 0;
 

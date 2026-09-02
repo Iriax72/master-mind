@@ -1,6 +1,7 @@
 export default class Game {
     constructor(combi, table, trys = 8) {
         if (!table) {
+            alert('Error: La table du jeu est introivable.')
             throw new Error('La table du jeu est introuvable.');
         }
 
@@ -8,6 +9,7 @@ export default class Game {
         this.table = table;
         this.rows = [...this.table.querySelectorAll('tr')];
         if (!this.rows.length) {
+            alert('Error: La table du jeu ne contient aucune ligne (tr).');
             throw new Error('La table du jeu ne contient aucune ligne (tr).');
         }
 

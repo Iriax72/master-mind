@@ -7,6 +7,7 @@ export default async function initGame(callback = ()=>{}) {
     try {
         const response = await fetch('../game/gameTable.html');
         if (!response.ok) {
+            alert('Error: Impossible de charger la grille : HTTP ' + response.status + ' ' + response.statusText);
             throw new Error(`Impossible de charger la grille : HTTP ${response.status} ${response.statusText}`);
         }
 
@@ -14,6 +15,7 @@ export default async function initGame(callback = ()=>{}) {
         const gameMarkup = gameDocument.querySelector('.game');
 
         if (!gameMarkup) {
+            alert('Error: Le fichier gameTable.html ne contient pas d\'élément .game.');
             throw new Error('Le fichier gameTable.html ne contient pas d’élément .game.');
         }
 

@@ -10,21 +10,25 @@ initGame(() => {
     // Références DOM
     const gameContainer = document.querySelector('#game-container');
     if (!gameContainer) {
+        alert('Error: Le conteneur #game-container est introuvable.');
         throw new Error('Le conteneur #game-container est introuvable.');
     }
 
     const table = gameContainer.querySelector('table');
     if (!table) {
+        alert('Error: La table du jeu est introuvable dans ')
         throw new Error('La table du jeu est introuvable dans #game-container.');
     }
 
     const colors = [...document.querySelectorAll('.color')];
     if (!colors.length) {
+        alert('Error: Aucune couleur n\'a été trouvée dans .color.');
         throw new Error('Aucune couleur n’a été trouvée dans .color.');
     }
 
     const submitBtn = document.querySelector('#submit');
     if (!submitBtn) {
+        alert('Error: Le bouton #submit est introuvable.');
         throw new Error('Le bouton #submit est introuvable.');
     }
 
@@ -47,6 +51,7 @@ initGame(() => {
 
         const allCases = [...document.querySelectorAll('.case')];
         if (!allCases.length) {
+            alert('Error: Aucune case .case n\'a été trouvée dans la grille.')
             throw new Error('Aucune case .case n’a été trouvée dans la grille.');
         }
 

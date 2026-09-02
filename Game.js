@@ -67,13 +67,16 @@ export default class Game {
     }
 
     resolve(result) {
-        if (result === 'WIN') {
-            alert(`Bravo !\nVictoire en ${this.turn} coups.`);
-        } else if (result === 'LOSE') {
-            alert(`Défaite :(\nLa combinaison était ${this.combinaison}.`);
-        } else {
-            alert('La partie à pris fin.');
+        if (typeof alert === 'function') {
+            if (result === 'WIN') {
+                alert(`Bravo !\nVictoire en ${this.turn} coups.`);
+            } else if (result === 'LOSE') {
+                alert(`Défaite :(\nLa combinaison était ${this.combinaison}.`);
+            } else {
+                alert('La partie à pris fin.');
+            }
         }
-        throw 'La partie a pris fin';
+
+        return result;
     }
 }

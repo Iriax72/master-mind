@@ -18,9 +18,81 @@ export default async function initGame(callback = ()=>{}) {
         }
 
         gameContainer.append(gameMarkup);
-        callback();
     } catch (error) {
         console.error('Erreur lors du chargement de la grille de jeu :', error);
-        throw new Error('La grille de jeu n’a pas pu être chargée.');
+
+        const fallbackMarkup = document.createElement('div');
+        fallbackMarkup.className = 'game';
+        fallbackMarkup.innerHTML = `
+            <table>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+                <tr>
+                    <td class="result"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="case"></td>
+                    <td class="result"></td>
+                </tr>
+            </table>
+        `;
+        gameContainer.append(fallbackMarkup);
     }
+
+    callback();
 }

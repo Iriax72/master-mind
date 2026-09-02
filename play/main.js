@@ -34,10 +34,14 @@ initGame(() => {
     }
 
     // Fonction pour autoriser le drag n drop
-    function allowDragNDrop(draggables) {
+    function allowDragNDrop(draggables, gameInstance) {
         draggables.forEach((draggable) => {
             draggable.addEventListener('dragstart', (event) => {
-                event.dataTransfer.setData('text/plain', draggable.style.backgroundColor);
+                if (!event.dataTransfer) {
+                    return;
+                }
+
+                event.dataTransfer.setData('text/plain', draggable.style.backgroundColor || '');
             });
         });
 
@@ -48,18 +52,23 @@ initGame(() => {
 
         allCases.forEach((goal) => {
             goal.addEventListener('dragover', (event) => {
-                if (game.isCurrentCell(goal)) {
+                if (gameInstance.isCurrentCell(goal)) {
                     event.preventDefault();
                 }
             });
 
             goal.addEventListener('drop', (event) => {
-                if (!game.isCurrentCell(goal)) {
+                if (!gameInstance.isCurrentCell(goal)) {
                     return;
                 }
 
                 event.preventDefault();
-                goal.style.backgroundColor = event.dataTransfer.getData('text/plain');
+                const color = event.dataTransfer?.getData('text/plain');
+                if (!color) {
+                    return;
+                }
+
+                goal.style.backgroundColor = color;
             });
         });
     }
@@ -68,7 +77,7 @@ initGame(() => {
     const game = new Game(Logic.rdmCombi(), table);
 
     // Autoriser le drag n drop des couleurs
-    allowDragNDrop(colors);
+    allowDragNDrop(colors, game);
 
     // eventListener pour lasser au tour suivant
     submitBtn.addEventListener('click', () => {
